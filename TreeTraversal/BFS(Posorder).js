@@ -32,14 +32,14 @@ class BST {
     else temp.left = newNode;
   }
 
-  include(value) {
-    if (this.root === null) return false;
+  PostOrder(node = this.root, data = []) {
+    if (node == null) return;
+    data.push(node.data);
 
-    let temp = this.root;
-    while (temp !== null && value !== temp.data)
-      value < temp.data ? (temp = temp.left) : (temp = temp.right);
+    if (node.right) this.PostOrder(node.right, data);
+    if (node.left) this.PostOrder(node.left, data);
 
-    return temp !== null ? true : false;
+    return data;
   }
 }
 
@@ -50,7 +50,4 @@ tree.insert(33);
 tree.insert(3);
 tree.insert(83);
 
-// console.log(tree);
-
-let res = tree.include(73);
-console.log(res);
+console.log(tree.PostOrder());

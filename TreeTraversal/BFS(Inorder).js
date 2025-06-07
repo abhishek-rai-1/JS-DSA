@@ -32,25 +32,23 @@ class BST {
     else temp.left = newNode;
   }
 
-  include(value) {
-    if (this.root === null) return false;
+  Inorder(node = this.root, data = []) {
+    if (node === null) return data;
 
-    let temp = this.root;
-    while (temp !== null && value !== temp.data)
-      value < temp.data ? (temp = temp.left) : (temp = temp.right);
+    if(node.left)   this.Inorder(node.left, data);
 
-    return temp !== null ? true : false;
+    data.push(node.data);
+
+    if(node.right)   this.Inorder(node.right, data);
+
+    return data;
   }
 }
 
 const tree = new BST();
 tree.insert(23);
 tree.insert(13);
-tree.insert(33);
 tree.insert(3);
 tree.insert(83);
-
-// console.log(tree);
-
-let res = tree.include(73);
-console.log(res);
+tree.insert(73);
+console.log(tree.Inorder());
